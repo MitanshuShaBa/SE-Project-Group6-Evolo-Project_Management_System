@@ -1,0 +1,4 @@
+- Password is saved in plain text (Security issues)
+- SQL injections (Security)
+- Server and database is stored in one place - monolithic
+- Not hosted anywhere
