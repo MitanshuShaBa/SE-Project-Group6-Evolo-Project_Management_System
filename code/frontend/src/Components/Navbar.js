@@ -3,7 +3,7 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom'
 
 const NavBar = () => {
-    const isLogin = true;
+    const isLogin = false;
     const navigate = useNavigate()
     return (
         <nav class="navbar navbar-expand-sm navbar-light navbar-custom">

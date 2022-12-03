@@ -1,4 +1,6 @@
 import Login from "./Components/Login";
+import Signup from "./Components/Signup";
+
 import Navbar from './Components/Navbar'
 import HomeHeader from './Components/HomeHeader'
 import Home from './Components/Home'
@@ -12,12 +14,13 @@ function App() {
     <BrowserRouter>
       <Navbar/>
       
-      <Login />
       <Routes>
         <Route path="/">
           <Route index element={<React.Fragment><HomeHeader/><Home /></React.Fragment>} />
 
           <Route path="login" element={<Login />} /> 
+          <Route path="signup" element={<Signup />} /> 
+
         </Route>
       </Routes>
       <Footer/>

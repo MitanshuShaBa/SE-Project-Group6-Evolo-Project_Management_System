@@ -1,6 +1,9 @@
 
 import Header from './Header'
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
+    const navigate = useNavigate();
     return(
         <div>
             <header id="header" class="header">
@@ -21,7 +24,12 @@ const Login = () => {
                             </div>
                             <button type="submit" class="btn btn-primary form-btn" name="submit">Login</button> 
                             <button type="submit" class="btn btn-primary form-btn" name="cancel">Cancel</button> 
-                            <p class="alter">Dont have an account, <a href="signup.php">Sign up</a></p>
+                            <p class="alter">Dont have an account, 
+                            {/* <a href="signup.php">Sign up</a> */}
+                            <a onClick={()=> navigate('/signup')}>Sign up </a>
+                            {/* <li class="nav-item" onClick={()=>navigate('/login')}><a class="nav-link page-scroll" >Login/Signup</a></li> */}
+                            </p>
+                            
                         </form>
                     </div>
                         <Header/> 
