@@ -3,7 +3,8 @@ const Task = require("../models/Task");
 const mongoose = require("mongoose");
 
 exports.createProject = (req, res) => {
-  const { name, description, startDate, user, organisation } = req.body;
+  const { name, description, startDate, organisation } = req.body;
+  const user = req.auth.id;
   const project = new Project({
     ...{
       name,
@@ -99,6 +100,12 @@ exports.removeMember = (req, res) => {
         return res
           .status(400)
           .send({ error: "Project needs atleast 1 member" });
+      }
+
+      if (project.leader.toString() === userID) {
+        return res
+          .status(400)
+          .send({ error: "You cannot remove the leader of the project" });
       }
 
       let tmp = project.members.map((arr) => arr.toString());

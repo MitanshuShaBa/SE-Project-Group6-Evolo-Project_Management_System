@@ -25,6 +25,19 @@ const organisationSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    members: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      validate: {
+        validator: (arr) => {
+          const s = new Set(arr.map(String));
+          return s.size === arr.length;
+        },
+        message: (p) =>
+          `The values provided for '${p.path}', ` +
+          `[${p.value}], contains duplicates.`,
+      },
+    },
   },
   {
     timestamps: true,
