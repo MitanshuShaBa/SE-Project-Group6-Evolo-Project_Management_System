@@ -1,4 +1,5 @@
 
+import Header from './Header'
 const Login = () => {
     return(
         <div>
@@ -23,12 +24,7 @@ const Login = () => {
                             <p class="alter">Dont have an account, <a href="signup.php">Sign up</a></p>
                         </form>
                     </div>
-                        <div class="col-lg-6">
-                            <div class="image-container">
-                                <img class="img-fluid" src="images/header-teamwork.svg" alt="alternative"/>
-                            </div>
-                             {/* //<!-- end of image-container --> */}
-                        </div> 
+                        <Header/> 
                         {/* <!-- end of col --> */}
                     </div> 
                     {/* <!-- end of row --> */}
