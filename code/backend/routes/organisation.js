@@ -7,6 +7,7 @@ const {
   createOrganisation,
   getOrganisation,
   updateOrganisation,
+  deleteOrganisation,
 } = require("../controllers/organisation");
 const router = express.Router();
 
@@ -17,6 +18,12 @@ router.patch(
   isSignedIn,
   hasOrgWriteAccess,
   updateOrganisation
+);
+router.delete(
+  "/:organisationID",
+  isSignedIn,
+  hasOrgWriteAccess,
+  deleteOrganisation
 );
 
 module.exports = router;

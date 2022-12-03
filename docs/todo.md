@@ -1,7 +1,6 @@
-- [ ] Organisation leader update
-- [ ] delete Organisation
-- [ ] Project leader update
+- [x] delete Organisation
+- [x] Project leader update
 - [ ] priority Tasks
 - [ ] Task activity logic
-- [ ] **Maybe** create chain of tasks with dependancy
+- [ ] **Maybe** create chain of tasks with dependency
 - [ ] There will be alert system for notifications

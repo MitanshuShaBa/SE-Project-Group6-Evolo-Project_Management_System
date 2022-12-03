@@ -1,4 +1,7 @@
 const Organisation = require("../models/Organisation");
+const Project = require("../models/Project");
+const Task = require("../models/Task");
+const mongoose = require("mongoose");
 
 exports.createOrganisation = (req, res) => {
   const { name, address, phoneNum } = req.body;
@@ -110,4 +113,32 @@ exports.removeMember = (req, res) => {
     });
 };
 
-// Delete Organisation - Needs discussion for implementation on how to delete child project and tasks
+exports.deleteOrganisation = async (req, res) => {
+  const { organisationID } = req.params;
+
+  const session = await mongoose.startSession();
+
+  try {
+    await session.withTransaction(async () => {
+      const projects = await Project.find({ organisation: organisationID })
+        .select("_id")
+        .session(session)
+        .exec();
+
+      await Promise.all(
+        projects.map(async (project) => {
+          await Task.deleteMany({ project }).session(session);
+          await Project.findByIdAndDelete(project).session(session);
+        })
+      );
+
+      await Organisation.findByIdAndDelete(organisationID).session(session);
+    });
+  } catch (e) {
+    console.log(e);
+    return res.status(400).send({ error: e });
+  }
+  session.endSession();
+
+  return res.status(200).send();
+};
