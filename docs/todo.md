@@ -1,0 +1,6 @@
+- [ ] Organisation leader update
+- [ ] delete Organisation
+- [ ] Project leader update
+- [ ] priority Tasks
+- [ ] **Maybe** create chain of tasks with dependancy
+- [ ] There will be alert system for notifications

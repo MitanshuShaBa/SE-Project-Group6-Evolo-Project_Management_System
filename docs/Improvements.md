@@ -2,3 +2,5 @@
 - SQL injections (Security)
 - Server and database is stored in one place - monolithic
 - Not hosted anywhere
+- Modular code (Frontend)
+- MVC structure (Backend)
