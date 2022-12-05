@@ -2,22 +2,16 @@ import React, { useState } from "react";
 import { close_task_form } from "../../utils";
 
 export const AddTask = ({ project, handleTaskRefresh }) => {
-  const [taskData, setTaskData] = useState(
-    project?.members?.length > 0
-      ? {
-          assignees: project?.members[0]._id,
-          name: "",
-          date: new Date().toDateString(),
-        }
-      : { assignees: null, name: "", date: new Date().toDateString() }
-  );
+  const [taskData, setTaskData] = useState({
+    assignees: "none",
+    name: "",
+    deadline: new Date().toDateString(),
+  });
   const handleChange = (e) => {
     setTaskData((data) => ({ ...data, [e.target.name]: e.target.value }));
-    console.log(taskData);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(taskData);
 
     fetch(`http://localhost:5000/task/create`, {
       method: "POST",
@@ -27,14 +21,14 @@ export const AddTask = ({ project, handleTaskRefresh }) => {
       },
       body: JSON.stringify({
         ...taskData,
-        assignees: [taskData.assignees],
+        assignees: taskData.assignees !== "none" ? [taskData.assignees] : [],
         project: project._id,
       }),
     })
       .then((res) => res.json())
       .then((_data) => {
         if (_data.error) {
-          alert(_data.error);
+          alert(_data.error.message);
           return;
         }
         close_task_form();
@@ -43,7 +37,7 @@ export const AddTask = ({ project, handleTaskRefresh }) => {
       })
       .catch((error) => {
         console.log(error);
-        alert(error);
+        alert(error.message);
       });
   };
   return (
@@ -59,8 +53,10 @@ export const AddTask = ({ project, handleTaskRefresh }) => {
             <select
               name="assignees"
               class="form-control"
+              defaultValue={"none"}
               onChange={handleChange}
             >
+              <option value={"none"}>Select an Option</option>
               {project?.members?.map((member) => {
                 return (
                   <option key={member._id} value={member._id}>

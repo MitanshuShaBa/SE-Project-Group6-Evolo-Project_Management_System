@@ -13,9 +13,7 @@ import {
 } from "../../utils";
 
 const AddMember = ({ organisation, project, handleProjRefresh }) => {
-  const [memberSelected, setMemberSelected] = useState(
-    project?.members.length > 0 ? project?.members[0]._id : null
-  );
+  const [memberSelected, setMemberSelected] = useState("none");
   return (
     <div id="new_member_form">
       <button id="close_member_form" onClick={close_member_form}>
@@ -27,29 +25,32 @@ const AddMember = ({ organisation, project, handleProjRefresh }) => {
           onSubmit={(e) => {
             e.preventDefault();
 
-            // fetch(
-            //   `http://localhost:5000/project/member/add/${project._id}/${memberSelected}`,
-            //   {
-            //     method: "PATCH",
-            //     headers: {
-            //       "Content-Type": "application/json",
-            //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-            //     },
-            //   }
-            // )
-            //   .then((res) => res.json())
-            //   .then((_data) => {
-            //  if (data.error) {
-            //    alert(data.error);
-            //    return;
-            //  }
-            //     close_member_form();
-            //     setMemberSelected(null);
-            //     handleProjRefresh();
-            //   })
-            //   .catch((error) => {
-            //     console.log(error);
-            //   });
+            memberSelected === "none" && alert("You have not selected a user");
+
+            memberSelected !== "none" &&
+              fetch(
+                `http://localhost:5000/project/member/add/${project._id}/${memberSelected}`,
+                {
+                  method: "PATCH",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              )
+                .then((res) => res.json())
+                .then((_data) => {
+                  if (_data.error) {
+                    alert(_data.error);
+                    return;
+                  }
+                  close_member_form();
+                  setMemberSelected(null);
+                  handleProjRefresh();
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
           }}
         >
           <div class="form-group">
@@ -58,14 +59,12 @@ const AddMember = ({ organisation, project, handleProjRefresh }) => {
               name="user"
               class="form-control"
               id="add_member_user"
-              defaultValue={null}
+              defaultValue="none"
               onChange={(e) => {
                 setMemberSelected(e.target.value);
               }}
             >
-              <option value={null} disabled hidden>
-                Select an Option
-              </option>
+              <option value={"none"}>Select an Option</option>
               {organisation &&
                 project &&
                 organisation.members
