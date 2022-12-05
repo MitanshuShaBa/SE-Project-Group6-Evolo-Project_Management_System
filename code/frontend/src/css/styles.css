@@ -51,10 +51,11 @@ body, p {
 		margin-top: 10%;
 		width: 40%;
 		margin-left: 33%;
+
 }
 .table-head{
 	color: white;
-	background-color: #00bfd8;
+	background-color: #1bacc9;
 	font-size: 25px;
 	text-decoration: bold;
 }
