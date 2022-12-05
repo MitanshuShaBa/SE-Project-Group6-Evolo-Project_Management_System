@@ -1,17 +1,16 @@
 # SE-Project-Group6
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7155361.svg)](https://doi.org/10.5281/zenodo.7155361)
-![GitHub](https://img.shields.io/github/license/devanshi39/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System)
-[![GitHub issues](https://img.shields.io/github/issues/devanshi39/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System)](https://github.com/devanshi39/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/issues)
-[![GitHub stars](https://img.shields.io/github/stars/devanshi39/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System)](https://github.com/devanshi39/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/devanshi39/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System)](https://github.com/devanshi39/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/network)
-![https://img.shields.io/github/languages/code-size/devanshi39/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System](https://img.shields.io/github/languages/code-size/devanshi39/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System)
+![GitHub](https://img.shields.io/github/license/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System)
+[![GitHub issues](https://img.shields.io/github/issues/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System)](https://github.com/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/issues)
+[![GitHub stars](https://img.shields.io/github/stars/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System)](https://github.com/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System)](https://github.com/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/network)
+![https://img.shields.io/github/languages/code-size/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System](https://img.shields.io/github/languages/code-size/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System)
 ![GitHub language count](https://img.shields.io/github/languages/count/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System)
 <!-- ![Discord](https://img.shields.io/discord/1027412417661120582) -->
-[![Code Coverage](https://codecov.io/gh/devanshi39/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/branch/main/graphs/badge.svg)](https://codecov.io/gh/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/branch/main)
+[![Code Coverage](https://codecov.io/gh/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/branch/main/graphs/badge.svg)](https://codecov.io/gh/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/branch/main)
 ![GitHub Workflow Status](https://github.com/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/actions/workflows/PHP-app.yml/badge.svg?branch=main)
 
-https://github.com/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/blob/main/CONTRIBUTING.md
 ## What is Evolo?
 Evolo is Dashboard based Project Management System. A complete solution for group projects in organizations that lets you track your work in any scenario. Working in a team is a cumbersome task, ease it using our project management system. Add statuses, comments, and attachments to make sure you have all the correct information to get your work done!
 Manage your team on this one platform having variety of features:
