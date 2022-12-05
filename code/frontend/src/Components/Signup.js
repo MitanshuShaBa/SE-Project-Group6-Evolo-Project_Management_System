@@ -51,7 +51,7 @@ const Signup = () => {
                           return;
                         }
                         localStorage.setItem("token", data.token);
-                        localStorage.setItem("user", data.user);
+                        localStorage.setItem("user", JSON.stringify(data.user));
                         navigate("/dashboard");
                       })
                       .catch((error) => {
