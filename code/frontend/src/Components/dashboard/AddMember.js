@@ -13,7 +13,9 @@ import {
 } from "../../utils";
 
 const AddMember = ({ organisation, project, handleProjRefresh }) => {
-  const [memberSelected, setMemberSelected] = useState(project?.members[0]._id);
+  const [memberSelected, setMemberSelected] = useState(
+    project?.members.length > 0 ? project?.members[0]._id : null
+  );
   return (
     <div id="new_member_form">
       <button id="close_member_form" onClick={close_member_form}>
@@ -24,26 +26,26 @@ const AddMember = ({ organisation, project, handleProjRefresh }) => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            fetch(
-              `http://localhost:5000/project/member/add/${project._id}/${memberSelected}`,
-              {
-                method: "PATCH",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-              }
-            )
-              .then((res) => res.json())
-              .then((_data) => {
-                console.log(_data);
-                close_member_form();
-                handleProjRefresh();
-              })
-              .catch((error) => {
-                console.log(error);
-                alert(error);
-              });
+
+            // fetch(
+            //   `http://localhost:5000/project/member/add/${project._id}/${memberSelected}`,
+            //   {
+            //     method: "PATCH",
+            //     headers: {
+            //       "Content-Type": "application/json",
+            //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+            //     },
+            //   }
+            // )
+            //   .then((res) => res.json())
+            //   .then((_data) => {
+            //     close_member_form();
+            //     setMemberSelected(null);
+            //     handleProjRefresh();
+            //   })
+            //   .catch((error) => {
+            //     console.log(error);
+            //   });
           }}
         >
           <div class="form-group">
