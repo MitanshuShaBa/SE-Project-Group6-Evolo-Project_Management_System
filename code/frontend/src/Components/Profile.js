@@ -1,4 +1,31 @@
+import { useEffect, useState } from "react";
 const Profile = () => {
+    const [organisations, setOrganisations] = useState([]);
+    useEffect(() => {
+        fetchOrg();
+        return () => {};
+      }, []);
+      
+    const fetchOrg = async () => {
+        fetch("http://localhost:5000/organisation/user/list", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.error) {
+              alert(data.error);
+              return;
+            }
+            console.log(data)
+            setOrganisations(data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
     return (
         <table className="table profile-table table-borderless">
             <tbody colSpan={2}>
@@ -7,7 +34,7 @@ const Profile = () => {
                 </tr>
                 <tr>
                     <td>Name</td>
-                    <td>Janvi Phadtare</td>
+                    <td>{JSON.parse(localStorage.getItem("user")).name}</td>
                 </tr>
                 <tr>
                     <td>Designation</td>
@@ -15,19 +42,15 @@ const Profile = () => {
                 </tr>
                 <tr>
                     <td>Email</td>
-                    <td>janviphadtare@gmail.com</td>
+                    <td>{JSON.parse(localStorage.getItem("user")).email}</td>
                 </tr>
                 <tr>
                     <td>Contact</td>
-                    <td>965238741</td>
+                    <td>{JSON.parse(localStorage.getItem("user")).contact || '-'}</td>
                 </tr>
                 <tr>
                     <td>Organization</td>
-                    <td>NCSU</td>
-                </tr>
-                <tr>
-                    <td>Project</td>
-                    <td>SE</td>
+                    <td>{organisations.length > 0 ? organisations.map((i, k)=>{return i.name + " "}) : "-"}</td>
                 </tr>
             </tbody>
         </table>
