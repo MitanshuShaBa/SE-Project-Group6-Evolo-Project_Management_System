@@ -38,6 +38,16 @@ exports.close_task_form = () => {
   bg.style.display = "none";
   return false;
 };
+exports.show_reassign_task = () => {
+  var bg = document.getElementById("new_reassign_form");
+  bg.style.display = "inline";
+  return false;
+};
+exports.close_reassign_form = () => {
+  var bg = document.getElementById("new_reassign_form");
+  bg.style.display = "none";
+  return false;
+};
 exports.show_submit_work = (t_id) => {
   document.getElementById("t_id_work").value = t_id;
   var bg = document.getElementById("new_submit_form");

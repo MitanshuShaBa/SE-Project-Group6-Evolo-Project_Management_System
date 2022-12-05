@@ -13,6 +13,7 @@ import {
   show_new_org,
   show_new_project,
   show_new_task,
+  show_reassign_task,
   show_remove_member,
 } from "../utils";
 import { ProjectForm } from "./dashboard/ProjectForm";
@@ -21,6 +22,7 @@ import { OrgForm } from "./dashboard/OrgForm";
 import AddMember from "./dashboard/AddMember";
 import RemoveMember from "./dashboard/RemoveMember";
 import { AddTask } from "./dashboard/AddTask";
+import { Reassign } from "./dashboard/Reassign";
 
 const Dashboard = () => {
   const [organisations, setOrganisations] = useState([]);
@@ -105,6 +107,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    fetchOrg();
     const orgSync = setInterval(() => {
       fetchOrg();
     }, 15000);
@@ -217,7 +220,13 @@ const Dashboard = () => {
                   <button
                     class="dash_button"
                     style={{ float: "right", marginRight: "15vw" }}
-                    onClick={show_new_task}
+                    onClick={() => {
+                      if (!taskSelected) {
+                        alert("Select a task first");
+                        return;
+                      }
+                      show_reassign_task();
+                    }}
                   >
                     Reassign Task
                   </button>
@@ -337,6 +346,12 @@ const Dashboard = () => {
         handleOrgRefresh={fetchOrg}
       />
       <AddTask project={projectSelected} handleTaskRefresh={fetchTask} />
+      <Reassign
+        project={projectSelected}
+        task={taskSelected}
+        handleTaskRefresh={fetchTask}
+        handleProjRefresh={fetchProj}
+      />
       <RemoveMember
         organisation={organisationSelected}
         project={projectSelected}

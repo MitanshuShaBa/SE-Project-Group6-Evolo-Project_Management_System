@@ -266,6 +266,32 @@ a{
     height: 90vh;
     padding: 20px;
 }
+/*Reassign task Form*/
+#new_reassign_form{
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    z-index: 11;
+}  
+#close_reassign_form{
+    border: none;
+    background-color: rgba(0,0,0,0);
+    color: white;
+    position:fixed;
+    margin-left: 70vw;
+    margin-top:2vh;
+}
+#reassign_form{
+    background-color: white;
+    margin: 5vh 30vw;
+    width: 40vw;
+    height: 90vh;
+    padding: 20px;
+}
 
 /*New submit Form*/
 #new_submit_form{
