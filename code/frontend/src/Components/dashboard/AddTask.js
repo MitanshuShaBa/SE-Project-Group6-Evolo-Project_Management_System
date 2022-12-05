@@ -33,8 +33,8 @@ export const AddTask = ({ project, handleTaskRefresh }) => {
     })
       .then((res) => res.json())
       .then((_data) => {
-        if (data.error) {
-          alert(data.error);
+        if (_data.error) {
+          alert(_data.error);
           return;
         }
         close_task_form();
