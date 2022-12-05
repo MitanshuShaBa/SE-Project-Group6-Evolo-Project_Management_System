@@ -4,6 +4,7 @@ import Signup from "./Components/Signup";
 import Navbar from "./Components/Navbar";
 import HomeHeader from "./Components/HomeHeader";
 import Home from "./Components/Home";
+import Dashboard from "./Components/Dashboard";
 import Footer from "./Components/Footer";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import "./css/styles.css";
@@ -45,7 +46,7 @@ function App() {
               </>
             }
           />
-          <Route path="dashboard" element={<h1>dashboard</h1>} />
+          <Route path="dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
     </BrowserRouter>
