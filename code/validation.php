@@ -15,7 +15,10 @@ $stmt->execute(array("email"=>$email));
 $row=$stmt->fetchALL(PDO::FETCH_ASSOC);
 if(sizeof($row)==0 || $row[0]["password"]!==$pass)
 {
-    header("Location: login.php");
+    echo '<script type="text/javascript">
+    window.alert("Invalid Password");
+    history.back();
+    </script>';
     return;
 }
 else{
