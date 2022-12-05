@@ -11,7 +11,6 @@
 [![Code Coverage](https://codecov.io/gh/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/branch/main/graphs/badge.svg)](https://codecov.io/gh/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/branch/main)
 ![GitHub Workflow Status](https://github.com/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/actions/workflows/PHP-app.yml/badge.svg?branch=main)
 
-https://github.com/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/blob/main/CONTRIBUTING.md
 ## What is Evolo?
 Evolo is Dashboard based Project Management System. A complete solution for group projects in organizations that lets you track your work in any scenario. Working in a team is a cumbersome task, ease it using our project management system. Add statuses, comments, and attachments to make sure you have all the correct information to get your work done!
 Manage your team on this one platform having variety of features:
