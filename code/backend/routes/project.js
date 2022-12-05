@@ -12,11 +12,13 @@ const {
   addMember,
   removeMember,
   deleteProject,
+  getProjectListForUser,
 } = require("../controllers/project");
 const router = express.Router();
 
 router.post("/create", isSignedIn, isInOrgForCreateProject, createProject);
 router.get("/:projectID", isSignedIn, isInOrg, getProject);
+router.get("/user/list/:organisationID", isSignedIn, getProjectListForUser);
 router.patch(
   "/:projectID",
   isSignedIn,

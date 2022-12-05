@@ -23,6 +23,7 @@ exports.getOrganisation = (req, res) => {
   const { organisationID } = req.params;
 
   Organisation.findById(organisationID)
+    .populate("members", "name email")
     .populate("leader", "name email")
     .exec((err, organisation) => {
       if (err) {
@@ -30,6 +31,21 @@ exports.getOrganisation = (req, res) => {
       }
 
       res.send(organisation);
+    });
+};
+
+exports.getOrganisationOfUser = (req, res) => {
+  const user = req.auth.id;
+
+  Organisation.find({ members: mongoose.mongoose.Types.ObjectId(user) })
+    .populate("members", "name email")
+    .populate("leader", "name email")
+    .exec((err, organisations) => {
+      if (err) {
+        return res.status(400).send({ error: err });
+      }
+
+      res.send(organisations);
     });
 };
 

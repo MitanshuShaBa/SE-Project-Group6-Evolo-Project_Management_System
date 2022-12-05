@@ -9,7 +9,7 @@ exports.createProject = (req, res) => {
     ...{
       name,
       description,
-      startDate,
+      startDate: startDate ? startDate : new Date(),
       leader: user,
       members: [user],
       organisation,
@@ -29,6 +29,7 @@ exports.getProject = (req, res) => {
   const { projectID } = req.params;
 
   Project.findById(projectID)
+    .populate("members", "name email")
     .populate("leader", "name email")
     .populate("organisation", "name")
     .exec((err, project) => {
@@ -41,6 +42,26 @@ exports.getProject = (req, res) => {
       }
 
       res.send(project);
+    });
+};
+
+exports.getProjectListForUser = (req, res) => {
+  const { organisationID } = req.params;
+  const user = req.auth.id;
+
+  Project.find({
+    members: mongoose.mongoose.Types.ObjectId(user),
+    organisation: organisationID,
+  })
+    .populate("members", "name email")
+    .populate("leader", "name email")
+    .populate("organisation", "name")
+    .exec((err, projects) => {
+      if (err) {
+        return res.status(400).send({ error: err });
+      }
+
+      res.send(projects);
     });
 };
 
@@ -65,7 +86,6 @@ exports.updateProject = (req, res) => {
 
 exports.addMember = (req, res) => {
   const { projectID, userID } = req.params;
-  console.log(req.params);
 
   Project.findById(projectID)
     .exec()
