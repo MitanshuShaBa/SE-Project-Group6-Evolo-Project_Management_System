@@ -42,6 +42,10 @@ const Dashboard = () => {
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
         setTasks(data);
         setTaskSelected(data.find((task) => task._id == taskSelected?._id));
       })
@@ -63,6 +67,10 @@ const Dashboard = () => {
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
         setProjects(data);
         setProjectsSelected(
           data.find((project) => project._id == projectSelected?._id)
@@ -81,6 +89,10 @@ const Dashboard = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
         // console.log(data);
         setOrganisations(data);
         setOrganisationsSelected(

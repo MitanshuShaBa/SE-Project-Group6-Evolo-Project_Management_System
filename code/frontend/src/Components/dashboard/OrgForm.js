@@ -18,6 +18,10 @@ export const OrgForm = ({ handleOrgRefresh }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
         console.log(data);
         close_org_form();
         handleOrgRefresh();

@@ -28,6 +28,10 @@ export const ProjectForm = ({ organisation, handleProjRefresh }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
         // console.log(data);
         close_project_form();
         handleProjRefresh();

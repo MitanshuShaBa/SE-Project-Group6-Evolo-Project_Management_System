@@ -36,6 +36,10 @@ const RemoveMember = ({ organisation, project, handleProjRefresh }) => {
             )
               .then((res) => res.json())
               .then((_data) => {
+                if (data.error) {
+                  alert(data.error);
+                  return;
+                }
                 close_remove_member_form();
                 setMemberSelected(null);
                 handleProjRefresh();
