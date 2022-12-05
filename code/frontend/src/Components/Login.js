@@ -30,6 +30,10 @@ const Login = () => {
                     })
                       .then((res) => res.json())
                       .then((data) => {
+                        if (data.error) {
+                          alert(data.error);
+                          return;
+                        }
                         localStorage.setItem("token", data.token);
                         localStorage.setItem("user", JSON.stringify(data.user));
                         navigate("/dashboard");
