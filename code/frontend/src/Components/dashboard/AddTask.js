@@ -33,7 +33,7 @@ export const AddTask = ({ project, handleTaskRefresh }) => {
         }
         close_task_form();
         setTaskData((data) => ({ assignees: data.assignees }));
-        // handleTaskRefresh();
+        handleTaskRefresh();
       })
       .catch((error) => {
         console.log(error);
