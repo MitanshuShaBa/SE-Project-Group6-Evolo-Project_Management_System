@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
+import validator from 'validator';
+
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -8,6 +10,18 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
+
+  const validatePassword = (value) => {
+    if (validator.isStrongPassword(value, {minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1})) {
+      console.log ('Strong Pass');
+      setPassword(value)
+      return true;
+    } 
+    else {
+      alert("Password must be at least 8 characters long contain a number, a special character, a lowercase letter and an uppercase letter");
+      console.log ('Weak Pass');
+    }
+  }
   return (
     <div>
       <header id="header" class="header">
@@ -18,6 +32,10 @@ const Signup = () => {
                 <h2> Sign up </h2>
                 <form
                   onSubmit={(e) => {
+                    if(!validatePassword(password)){
+                      e.preventDefault();
+                    }
+                    else{
                     e.preventDefault();
                     fetch("http://localhost:5000/auth/signup", {
                       method: "POST",
@@ -39,7 +57,7 @@ const Signup = () => {
                       .catch((error) => {
                         console.log(error);
                       });
-                  }}
+                  }}}
                 >
                   <div class="form-group">
                     <label>Name</label>
