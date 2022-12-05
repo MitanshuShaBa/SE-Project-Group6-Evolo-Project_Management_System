@@ -6,6 +6,10 @@ if(isset($_POST["cancel"])){
     return;
 }
 
+function checkemail($str) {
+    return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $str)) ? FALSE : TRUE;
+}
+
 $name = trim($_POST['name']);    
 $email = trim($_POST['email']);
 $pass = $_POST['password'];
@@ -21,6 +25,13 @@ if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($pass) < 8
         </script>';
 
 }
+elseif(!checkemail($email)){
+    echo '<script type="text/javascript">
+    window.alert("Invalid email address.");
+    history.back();
+    </script>';
+    // echo 'Invalid Email';
+ }
 else
 {
     echo 'Strong password.';
