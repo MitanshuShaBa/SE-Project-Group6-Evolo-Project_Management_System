@@ -82,7 +82,7 @@ const Signup = () => {
                     <label>Contact number</label>
                     <input
                       onChange={(e) => {
-                        setPhoneNum(e.target.value);
+                        setPhoneNum(parseInt(e.target.value));
                       }}
                       type="tel"
                       name="contact"
