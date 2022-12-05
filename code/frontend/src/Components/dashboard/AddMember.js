@@ -12,7 +12,7 @@ import {
   show_new_project,
 } from "../../utils";
 
-const AddMember = ({ organisation, project, handleProjRefresh }) => {
+const AddMember = ({ organisation, project, handleOrgRefresh }) => {
   const [memberSelected, setMemberSelected] = useState("none");
   return (
     <div id="new_member_form">
@@ -46,7 +46,7 @@ const AddMember = ({ organisation, project, handleProjRefresh }) => {
                   }
                   close_member_form();
                   setMemberSelected(null);
-                  handleProjRefresh();
+                  handleOrgRefresh();
                 })
                 .catch((error) => {
                   console.log(error);

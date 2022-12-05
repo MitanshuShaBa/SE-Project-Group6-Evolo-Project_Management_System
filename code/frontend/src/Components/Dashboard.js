@@ -105,8 +105,12 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    fetchOrg();
-    return () => {};
+    const orgSync = setInterval(() => {
+      fetchOrg();
+    }, 15000);
+    return () => {
+      clearInterval(orgSync);
+    };
     // eslint-disable-next-line
   }, []);
 
@@ -211,7 +215,15 @@ const Dashboard = () => {
                     Add New Member
                   </button>
                   <button
-                    class="dash_button button_right"
+                    class="dash_button"
+                    style={{ float: "right", marginRight: "15vw" }}
+                    onClick={show_new_task}
+                  >
+                    Reassign Task
+                  </button>
+                  <button
+                    class="dash_button "
+                    style={{ float: "right", marginRight: "1vw" }}
                     onClick={show_new_task}
                   >
                     Assign Task
@@ -250,8 +262,13 @@ const Dashboard = () => {
                               <td>{task.name}</td>
                               <td>{task.description}</td>
                               <td>{task.status}</td>
-                              <td>{task.deadline}</td>
-                              <td>{task.work}</td>
+                              <td>{new Date(task.deadline).toDateString()}</td>
+                              <td>
+                                {task.work}{" "}
+                                <button class="dash_submit_button">
+                                  Submit Work
+                                </button>
+                              </td>
                               <td>Verify</td>
                             </tr>
                           );
@@ -267,6 +284,11 @@ const Dashboard = () => {
                   <button
                     class="dash_button button_right"
                     onClick={() => {
+                      if (!taskSelected) {
+                        alert("You have not selected any task");
+                        return;
+                      }
+
                       window.confirm("Are you sure you want to delete it?") &&
                         fetch(
                           "http://localhost:5000/task/" + taskSelected._id,
@@ -312,7 +334,7 @@ const Dashboard = () => {
       <AddMember
         organisation={organisationSelected}
         project={projectSelected}
-        handleProjRefresh={fetchProj}
+        handleOrgRefresh={fetchOrg}
       />
       <AddTask project={projectSelected} handleTaskRefresh={fetchTask} />
       <RemoveMember
