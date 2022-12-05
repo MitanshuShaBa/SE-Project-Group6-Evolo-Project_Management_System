@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
       },
     },
     phoneNum: {
-      type: Number,
+      type: String,
       validate: {
         validator: isMobilePhone,
         message: "{VALUE} is not a valid phone number",
