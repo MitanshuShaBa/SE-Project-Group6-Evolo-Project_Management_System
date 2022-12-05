@@ -34,6 +34,11 @@ export const AddTask = ({ project, handleTaskRefresh }) => {
         close_task_form();
         setTaskData((data) => ({ assignees: data.assignees }));
         handleTaskRefresh();
+        setTaskData({
+          assignees: "none",
+          name: "",
+          deadline: new Date().toDateString(),
+        })
       })
       .catch((error) => {
         console.log(error);
@@ -55,6 +60,7 @@ export const AddTask = ({ project, handleTaskRefresh }) => {
               class="form-control"
               defaultValue={"none"}
               onChange={handleChange}
+              value={taskData.assignees}
             >
               <option value={"none"}>Select an Option</option>
               {project?.members?.map((member) => {
@@ -73,6 +79,7 @@ export const AddTask = ({ project, handleTaskRefresh }) => {
               name="name"
               class="form-control"
               onChange={handleChange}
+              value={taskData.name}
             />
           </div>
           <div class="form-group">
@@ -81,6 +88,7 @@ export const AddTask = ({ project, handleTaskRefresh }) => {
               name="description"
               class="form-control"
               onChange={handleChange}
+              
             ></textarea>
           </div>
           <div class="form-group">
@@ -90,6 +98,7 @@ export const AddTask = ({ project, handleTaskRefresh }) => {
               name="deadline"
               class="form-control"
               onChange={handleChange}
+              value={taskData.deadline}
             />
           </div>
           <div class="form-group">
