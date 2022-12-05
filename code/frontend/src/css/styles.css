@@ -47,7 +47,17 @@ body, p {
 .p-heading {
 	margin-bottom: 3.875rem;
 }
-
+.profile-table {
+		margin-top: 10%;
+		width: 40%;
+		margin-left: 33%;
+}
+.table-head{
+	color: white;
+	background-color: #00bfd8;
+	font-size: 25px;
+	text-decoration: bold;
+}
 .li-space-lg li {
 	margin-bottom: 0.25rem;
 }
