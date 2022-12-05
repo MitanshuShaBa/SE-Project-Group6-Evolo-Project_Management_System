@@ -8,13 +8,15 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" aria-haspopup="true" aria-expanded="false">Hi, '.$_SESSION["name"].'</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#"><span class="item-text">Profile</span></a>
+                        <a class="dropdown-item" href="profile.php"><span class="item-text">Profile</span></a>
                         <div class="dropdown-items-divide-hr"></div>
                         <a class="dropdown-item" href="logout.php"><span class="item-text">Logout</span></a>
                     </div>
                 </li>';
+        $direct='dashboard.php';
     }
     else{
+        $direct='login.php';
         $menu= '<li class="nav-item"><a class="nav-link page-scroll" href="login.php">Login/Signup</a></li>';
     }
 ?>
@@ -75,7 +77,7 @@
                         <div class="text-container">
                             <h1><span class="turquoise">One platform, better teamwork.</span> </h1>
                             <p class="p-large">Manage all your projects from start to finish.</p>
-                            <a class="btn-solid-lg page-scroll" href="login.php">DISCOVER</a>
+                            <a class="btn-solid-lg page-scroll" href="<?echo $direct;?>">DISCOVER</a>
                         </div> <!-- end of text-container -->
                     </div> <!-- end of col -->
                     <div class="col-lg-6">
