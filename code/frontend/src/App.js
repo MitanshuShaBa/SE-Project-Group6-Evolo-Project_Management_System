@@ -9,6 +9,7 @@ import Footer from "./Components/Footer";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import "./css/styles.css";
 import React from "react";
+import Profile from "./Components/Profile";
 
 function App() {
   return (
@@ -43,6 +44,14 @@ function App() {
               <>
                 <Signup />
                 <Footer />
+              </>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <>
+                <Profile />
               </>
             }
           />
