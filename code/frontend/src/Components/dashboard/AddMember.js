@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   close_delete_task_form,
   close_member_form,
@@ -10,10 +10,10 @@ import {
   show_new_member,
   show_new_org,
   show_new_project,
-} from "../../utils";
+} from '../../utils';
 
 const AddMember = ({ organisation, project, handleOrgRefresh }) => {
-  const [memberSelected, setMemberSelected] = useState("none");
+  const [memberSelected, setMemberSelected] = useState('none');
   return (
     <div id="new_member_form">
       <button id="close_member_form" onClick={close_member_form}>
@@ -25,19 +25,16 @@ const AddMember = ({ organisation, project, handleOrgRefresh }) => {
           onSubmit={(e) => {
             e.preventDefault();
 
-            memberSelected === "none" && alert("You have not selected a user");
+            memberSelected === 'none' && alert('You have not selected a user');
 
-            memberSelected !== "none" &&
-              fetch(
-                `http://localhost:5000/project/member/add/${project._id}/${memberSelected}`,
-                {
-                  method: "PATCH",
-                  headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                  },
-                }
-              )
+            memberSelected !== 'none' &&
+              fetch(`http://localhost:5000/project/member/add/${project._id}/${memberSelected}`, {
+                method: 'PATCH',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+              })
                 .then((res) => res.json())
                 .then((_data) => {
                   if (_data.error) {
@@ -64,16 +61,11 @@ const AddMember = ({ organisation, project, handleOrgRefresh }) => {
                 setMemberSelected(e.target.value);
               }}
             >
-              <option value={"none"}>Select an Option</option>
+              <option value={'none'}>Select an Option</option>
               {organisation &&
                 project &&
                 organisation.members
-                  .filter(
-                    (leftValue) =>
-                      !project.members.some(
-                        (rightValue) => leftValue._id === rightValue._id
-                      )
-                  )
+                  .filter((leftValue) => !project.members.some((rightValue) => leftValue._id === rightValue._id))
                   .map((member) => (
                     <option key={member._id} value={member._id}>
                       {member.name} | {member.email}
@@ -85,11 +77,7 @@ const AddMember = ({ organisation, project, handleOrgRefresh }) => {
             <input type="hidden" name="project_id" value="" />
           </div>
 
-          <button
-            type="submit"
-            class="btn btn-primary form-btn"
-            name="submit_member_form"
-          >
+          <button type="submit" class="btn btn-primary form-btn" name="submit_member_form">
             Add Member
           </button>
         </form>

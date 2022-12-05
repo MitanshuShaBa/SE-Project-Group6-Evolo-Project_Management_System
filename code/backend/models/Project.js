@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const projectSchema = new mongoose.Schema(
   {
@@ -17,25 +17,23 @@ const projectSchema = new mongoose.Schema(
     },
     leader: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
     members: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "User",
+      ref: 'User',
       validate: {
         validator: (arr) => {
           const s = new Set(arr.map(String));
           return s.size === arr.length;
         },
-        message: (p) =>
-          `The values provided for '${p.path}', ` +
-          `[${p.value}], contains duplicates.`,
+        message: (p) => `The values provided for '${p.path}', ` + `[${p.value}], contains duplicates.`,
       },
     },
     organisation: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Organisation",
+      ref: 'Organisation',
       required: true,
     },
     archived: {
@@ -48,4 +46,4 @@ const projectSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Project", projectSchema);
+module.exports = mongoose.model('Project', projectSchema);

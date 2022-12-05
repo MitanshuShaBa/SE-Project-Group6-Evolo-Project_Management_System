@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   close_delete_task_form,
   close_member_form,
@@ -10,10 +10,10 @@ import {
   show_new_member,
   show_new_org,
   show_new_project,
-} from "../../utils";
+} from '../../utils';
 
 const RemoveMember = ({ organisation, project, handleProjRefresh }) => {
-  const [memberSelected, setMemberSelected] = useState("none");
+  const [memberSelected, setMemberSelected] = useState('none');
   return (
     <div id="remove_member_form">
       <button id="close_remove_member_form" onClick={close_remove_member_form}>
@@ -24,16 +24,13 @@ const RemoveMember = ({ organisation, project, handleProjRefresh }) => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            fetch(
-              `http://localhost:5000/project/member/remove/${project._id}/${memberSelected}`,
-              {
-                method: "PATCH",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-              }
-            )
+            fetch(`http://localhost:5000/project/member/remove/${project._id}/${memberSelected}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              },
+            })
               .then((res) => res.json())
               .then((_data) => {
                 if (_data.error) {
@@ -55,12 +52,12 @@ const RemoveMember = ({ organisation, project, handleProjRefresh }) => {
               name="user"
               class="form-control"
               id="remove_member_user"
-              defaultValue={"none"}
+              defaultValue={'none'}
               onChange={(e) => {
                 setMemberSelected(e.target.value);
               }}
             >
-              <option value={"none"} selected disabled hidden>
+              <option value={'none'} selected disabled hidden>
                 Select an Option
               </option>
               {organisation &&
@@ -76,11 +73,7 @@ const RemoveMember = ({ organisation, project, handleProjRefresh }) => {
             <input type="hidden" name="project_id" value="" />
           </div>
 
-          <button
-            type="submit"
-            class="btn btn-primary form-btn"
-            name="submit_remove_member_form"
-          >
+          <button type="submit" class="btn btn-primary form-btn" name="submit_remove_member_form">
             Remove Member
           </button>
         </form>

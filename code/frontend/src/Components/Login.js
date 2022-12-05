@@ -1,11 +1,11 @@
-import Header from "./Header";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import Header from './Header';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <div>
       <header id="header" class="header">
@@ -18,10 +18,10 @@ const Login = () => {
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    fetch("http://localhost:5000/auth/signIn", {
-                      method: "POST",
+                    fetch('http://localhost:5000/auth/signIn', {
+                      method: 'POST',
                       headers: {
-                        "Content-Type": "application/json",
+                        'Content-Type': 'application/json',
                       },
                       body: JSON.stringify({
                         email,
@@ -34,9 +34,9 @@ const Login = () => {
                           alert(data.error);
                           return;
                         }
-                        localStorage.setItem("token", data.token);
-                        localStorage.setItem("user", JSON.stringify(data.user));
-                        navigate("/dashboard");
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        navigate('/dashboard');
                       })
                       .catch((error) => {
                         console.log(error);
@@ -65,18 +65,14 @@ const Login = () => {
                       class="form-control"
                     />
                   </div>
-                  <button
-                    type="submit"
-                    class="btn btn-primary form-btn"
-                    name="submit"
-                  >
+                  <button type="submit" class="btn btn-primary form-btn" name="submit">
                     Login
                   </button>
 
                   <p class="alter">
                     Dont have an account,
                     {/* <a href="signup.php">Sign up</a> */}
-                    <Link to={"/signup"}>Sign up </Link>
+                    <Link to={'/signup'}>Sign up </Link>
                     {/* <li class="nav-item" onClick={()=>navigate('/login')}><a class="nav-link page-scroll" >Login/Signup</a></li> */}
                   </p>
                 </form>

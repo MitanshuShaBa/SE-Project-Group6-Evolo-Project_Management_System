@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   close_delete_task_form,
   close_member_form,
@@ -8,18 +8,18 @@ import {
   close_task_form,
   close_verify_form,
   show_new_project,
-} from "../../utils";
+} from '../../utils';
 
 export const ProjectForm = ({ organisation, handleProjRefresh }) => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/project/create", {
-      method: "POST",
+    fetch('http://localhost:5000/project/create', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({
         name: title,
@@ -61,11 +61,7 @@ export const ProjectForm = ({ organisation, handleProjRefresh }) => {
             />
           </div>
 
-          <button
-            type="submit"
-            class="btn btn-primary form-btn"
-            name="submit_new_project"
-          >
+          <button type="submit" class="btn btn-primary form-btn" name="submit_new_project">
             Submit
           </button>
         </form>

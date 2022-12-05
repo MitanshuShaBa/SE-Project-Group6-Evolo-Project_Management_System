@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { close_org_form } from "../../utils";
+import React, { useState } from 'react';
+import { close_org_form } from '../../utils';
 
 export const OrgForm = ({ handleOrgRefresh }) => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/organisation/create", {
-      method: "POST",
+    fetch('http://localhost:5000/organisation/create', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({
         name: title,
@@ -51,11 +51,7 @@ export const OrgForm = ({ handleOrgRefresh }) => {
             />
           </div>
 
-          <button
-            type="submit"
-            class="btn btn-primary form-btn"
-            name="submit_new_org"
-          >
+          <button type="submit" class="btn btn-primary form-btn" name="submit_new_org">
             Submit
           </button>
         </form>

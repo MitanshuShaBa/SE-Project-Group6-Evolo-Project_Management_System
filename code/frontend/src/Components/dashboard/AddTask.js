@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { close_task_form } from "../../utils";
+import React, { useState } from 'react';
+import { close_task_form } from '../../utils';
 
 export const AddTask = ({ project, handleTaskRefresh }) => {
   const [taskData, setTaskData] = useState({
-    assignees: "none",
-    name: "",
+    assignees: 'none',
+    name: '',
     deadline: new Date().toDateString(),
   });
   const handleChange = (e) => {
@@ -14,14 +14,14 @@ export const AddTask = ({ project, handleTaskRefresh }) => {
     e.preventDefault();
 
     fetch(`http://localhost:5000/task/create`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({
         ...taskData,
-        assignees: taskData.assignees !== "none" ? [taskData.assignees] : [],
+        assignees: taskData.assignees !== 'none' ? [taskData.assignees] : [],
         project: project._id,
       }),
     })
@@ -35,10 +35,10 @@ export const AddTask = ({ project, handleTaskRefresh }) => {
         setTaskData((data) => ({ assignees: data.assignees }));
         handleTaskRefresh();
         setTaskData({
-          assignees: "none",
-          name: "",
+          assignees: 'none',
+          name: '',
           deadline: new Date().toDateString(),
-        })
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -58,11 +58,11 @@ export const AddTask = ({ project, handleTaskRefresh }) => {
             <select
               name="assignees"
               class="form-control"
-              defaultValue={"none"}
+              defaultValue={'none'}
               onChange={handleChange}
               value={taskData.assignees}
             >
-              <option value={"none"}>Select an Option</option>
+              <option value={'none'}>Select an Option</option>
               {project?.members?.map((member) => {
                 return (
                   <option key={member._id} value={member._id}>
@@ -74,42 +74,21 @@ export const AddTask = ({ project, handleTaskRefresh }) => {
           </div>
           <div class="form-group">
             <label>Task Name:</label>
-            <input
-              type="text"
-              name="name"
-              class="form-control"
-              onChange={handleChange}
-              value={taskData.name}
-            />
+            <input type="text" name="name" class="form-control" onChange={handleChange} value={taskData.name} />
           </div>
           <div class="form-group">
             <label>Description:</label>
-            <textarea
-              name="description"
-              class="form-control"
-              onChange={handleChange}
-              
-            ></textarea>
+            <textarea name="description" class="form-control" onChange={handleChange}></textarea>
           </div>
           <div class="form-group">
             <label>Deadline:</label>
-            <input
-              type="date"
-              name="deadline"
-              class="form-control"
-              onChange={handleChange}
-              value={taskData.deadline}
-            />
+            <input type="date" name="deadline" class="form-control" onChange={handleChange} value={taskData.deadline} />
           </div>
           <div class="form-group">
             <input type="hidden" name="project_id" value="" />
           </div>
 
-          <button
-            type="submit"
-            class="btn btn-primary form-btn"
-            name="submit_task_form"
-          >
+          <button type="submit" class="btn btn-primary form-btn" name="submit_task_form">
             Assign
           </button>
         </form>

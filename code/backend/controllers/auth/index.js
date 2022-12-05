@@ -1,6 +1,6 @@
-const User = require("../../models/User");
-const jwt = require("jsonwebtoken");
-const { isSignedIn } = require("./middlewares");
+const User = require('../../models/User');
+const jwt = require('jsonwebtoken');
+const { isSignedIn } = require('./middlewares');
 // const { transporter } = require("../../utils/transporter");
 
 exports.isSignedIn = isSignedIn;
@@ -11,7 +11,7 @@ exports.signUp = (req, res) => {
     if (err) {
       if (err.keyPattern?.email === 1) {
         return res.status(406).json({
-          error: "User with this email already exists",
+          error: 'User with this email already exists',
         });
       }
       return res.status(400).json({
@@ -29,12 +29,12 @@ exports.signIn = (req, res) => {
   User.findOne({ email }, (err, user) => {
     if (err || !user) {
       return res.status(400).json({
-        error: "User email does not exist",
+        error: 'User email does not exist',
       });
     }
     if (!user.authenticate(password)) {
       return res.status(401).json({
-        error: "Email and Password do not match",
+        error: 'Email and Password do not match',
       });
     }
 
@@ -98,7 +98,7 @@ exports.signIn = (req, res) => {
 const getToken = (user) => {
   const { _id, email } = user;
   const token = jwt.sign({ id: _id, email }, process.env.SECRET, {
-    expiresIn: "1y",
+    expiresIn: '1y',
   });
 
   return token;

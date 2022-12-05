@@ -1,14 +1,9 @@
-import React, { useState } from "react";
-import { close_reassign_form } from "../../utils";
+import React, { useState } from 'react';
+import { close_reassign_form } from '../../utils';
 
-export const Reassign = ({
-  project,
-  task,
-  handleTaskRefresh,
-  handleProjRefresh,
-}) => {
+export const Reassign = ({ project, task, handleTaskRefresh, handleProjRefresh }) => {
   const [taskData, setTaskData] = useState({
-    assignees: "none",
+    assignees: 'none',
   });
   const handleChange = (e) => {
     setTaskData((data) => ({ ...data, [e.target.name]: e.target.value }));
@@ -17,16 +12,16 @@ export const Reassign = ({
     e.preventDefault();
     console.log(taskData);
 
-    if (taskData.assignees === "none") {
-      alert("You must select someone");
+    if (taskData.assignees === 'none') {
+      alert('You must select someone');
       return;
     }
 
     fetch(`http://localhost:5000/task/reassign/${task._id}`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({
         assignees: [...task.assignees, taskData.assignees],
@@ -57,20 +52,10 @@ export const Reassign = ({
         <form onSubmit={handleSubmit}>
           <div class="form-group">
             <label>Member:</label>
-            <select
-              name="assignees"
-              class="form-control"
-              defaultValue={"none"}
-              onChange={handleChange}
-            >
-              <option value={"none"}>Select an Option</option>
+            <select name="assignees" class="form-control" defaultValue={'none'} onChange={handleChange}>
+              <option value={'none'}>Select an Option</option>
               {project?.members
-                ?.filter(
-                  (leftValue) =>
-                    !task.assignees.some(
-                      (rightValue) => leftValue._id === rightValue._id
-                    )
-                )
+                ?.filter((leftValue) => !task.assignees.some((rightValue) => leftValue._id === rightValue._id))
                 .map((member) => {
                   return (
                     <option key={member._id} value={member._id}>
@@ -90,7 +75,7 @@ export const Reassign = ({
                       // assigneesSelected(assignee);
                     }}
                     style={{
-                      cursor: "pointer",
+                      cursor: 'pointer',
                     }}
                     key={assignee._id}
                   >
@@ -104,11 +89,7 @@ export const Reassign = ({
             <input type="hidden" name="project_id" value="" />
           </div>
 
-          <button
-            type="submit"
-            class="btn btn-primary form-btn"
-            name="submit_reassign_form"
-          >
+          <button type="submit" class="btn btn-primary form-btn" name="submit_reassign_form">
             Assign
           </button>
         </form>

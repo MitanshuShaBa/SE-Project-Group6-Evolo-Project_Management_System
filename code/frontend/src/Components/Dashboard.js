@@ -1,5 +1,5 @@
-import "../css/styles.css";
-import "../css/dash_style.css";
+import '../css/styles.css';
+import '../css/dash_style.css';
 import {
   close_delete_task_form,
   close_member_form,
@@ -15,14 +15,14 @@ import {
   show_new_task,
   show_reassign_task,
   show_remove_member,
-} from "../utils";
-import { ProjectForm } from "./dashboard/ProjectForm";
-import { useEffect, useState } from "react";
-import { OrgForm } from "./dashboard/OrgForm";
-import AddMember from "./dashboard/AddMember";
-import RemoveMember from "./dashboard/RemoveMember";
-import { AddTask } from "./dashboard/AddTask";
-import { Reassign } from "./dashboard/Reassign";
+} from '../utils';
+import { ProjectForm } from './dashboard/ProjectForm';
+import { useEffect, useState } from 'react';
+import { OrgForm } from './dashboard/OrgForm';
+import AddMember from './dashboard/AddMember';
+import RemoveMember from './dashboard/RemoveMember';
+import { AddTask } from './dashboard/AddTask';
+import { Reassign } from './dashboard/Reassign';
 
 const Dashboard = () => {
   const [organisations, setOrganisations] = useState([]);
@@ -35,10 +35,10 @@ const Dashboard = () => {
   const fetchTask = () =>
     organisationSelected &&
     projectSelected &&
-    fetch("http://localhost:5000/task/all/" + projectSelected._id, {
-      method: "GET",
+    fetch('http://localhost:5000/task/all/' + projectSelected._id, {
+      method: 'GET',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     })
       .then((res) => res.json())
@@ -57,15 +57,12 @@ const Dashboard = () => {
 
   const fetchProj = () =>
     organisationSelected &&
-    fetch(
-      "http://localhost:5000/project/user/list/" + organisationSelected._id,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    )
+    fetch('http://localhost:5000/project/user/list/' + organisationSelected._id, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
@@ -74,19 +71,17 @@ const Dashboard = () => {
           return;
         }
         setProjects(data);
-        setProjectsSelected(
-          data.find((project) => project._id == projectSelected?._id)
-        );
+        setProjectsSelected(data.find((project) => project._id == projectSelected?._id));
       })
       .catch((error) => {
         console.log(error);
       });
 
   const fetchOrg = async () => {
-    fetch("http://localhost:5000/organisation/user/list", {
-      method: "GET",
+    fetch('http://localhost:5000/organisation/user/list', {
+      method: 'GET',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     })
       .then((res) => res.json())
@@ -97,9 +92,7 @@ const Dashboard = () => {
         }
         // console.log(data);
         setOrganisations(data);
-        setOrganisationsSelected(
-          data.find((org) => org._id == organisationSelected?._id)
-        );
+        setOrganisationsSelected(data.find((org) => org._id == organisationSelected?._id));
       })
       .catch((error) => {
         console.log(error);
@@ -144,12 +137,11 @@ const Dashboard = () => {
                         setOrganisationsSelected(organisation);
                       }}
                       style={{
-                        cursor: "pointer",
+                        cursor: 'pointer',
                         backgroundColor:
-                          organisationSelected &&
-                          organisation._id === organisationSelected._id
-                            ? "rgba(232,240,251,0.2)"
-                            : "",
+                          organisationSelected && organisation._id === organisationSelected._id
+                            ? 'rgba(232,240,251,0.2)'
+                            : '',
                       }}
                       key={organisation._id}
                     >
@@ -159,11 +151,7 @@ const Dashboard = () => {
                 })}
               </ul>
               <div class="new_org_div">
-                <button
-                  class="new_project_btn"
-                  style={{ width: "7vw" }}
-                  onClick={show_new_org}
-                >
+                <button class="new_project_btn" style={{ width: '7vw' }} onClick={show_new_org}>
                   New Org
                 </button>
               </div>
@@ -176,11 +164,9 @@ const Dashboard = () => {
                         setProjectsSelected(project);
                       }}
                       style={{
-                        cursor: "pointer",
+                        cursor: 'pointer',
                         backgroundColor:
-                          projectSelected && project._id === projectSelected._id
-                            ? "rgba(232,240,251,0.2)"
-                            : "",
+                          projectSelected && project._id === projectSelected._id ? 'rgba(232,240,251,0.2)' : '',
                       }}
                       key={project._id}
                     >
@@ -190,11 +176,7 @@ const Dashboard = () => {
                 })}
               </ul>
               <div class="new_project_div">
-                <button
-                  class="new_project_btn"
-                  style={{ width: "7vw", left: "9vw" }}
-                  onClick={show_new_project}
-                >
+                <button class="new_project_btn" style={{ width: '7vw', left: '9vw' }} onClick={show_new_project}>
                   New Project
                 </button>
               </div>
@@ -206,23 +188,17 @@ const Dashboard = () => {
                 <>
                   <div class="dash_header">
                     <h2 class="project_name">{projectSelected.name}</h2>
-                    <h5 class="project_organization">
-                      {" "}
-                      - {projectSelected.organisation.name}
-                    </h5>
+                    <h5 class="project_organization"> - {projectSelected.organisation.name}</h5>
                   </div>
-                  <button
-                    class="dash_button button_left"
-                    onClick={show_new_member}
-                  >
+                  <button class="dash_button button_left" onClick={show_new_member}>
                     Add New Member
                   </button>
                   <button
                     class="dash_button"
-                    style={{ float: "right", marginRight: "15vw" }}
+                    style={{ float: 'right', marginRight: '15vw' }}
                     onClick={() => {
                       if (!taskSelected) {
-                        alert("Select a task first");
+                        alert('Select a task first');
                         return;
                       }
                       show_reassign_task();
@@ -230,11 +206,7 @@ const Dashboard = () => {
                   >
                     Reassign Task
                   </button>
-                  <button
-                    class="dash_button "
-                    style={{ float: "right", marginRight: "1vw" }}
-                    onClick={show_new_task}
-                  >
+                  <button class="dash_button " style={{ float: 'right', marginRight: '1vw' }} onClick={show_new_task}>
                     Assign Task
                   </button>
                   <table class="dash_table">
@@ -260,23 +232,17 @@ const Dashboard = () => {
                                 setTaskSelected(task);
                               }}
                               style={{
-                                cursor: "pointer",
-                                backgroundColor:
-                                  taskSelected &&
-                                  task._id === taskSelected._id &&
-                                  "#4a4df7", //TODO color choose better
+                                cursor: 'pointer',
+                                backgroundColor: taskSelected && task._id === taskSelected._id && '#4a4df7', //TODO color choose better
                               }}
                             >
-                              <td>{assigneesNames.join(",")}</td>
+                              <td>{assigneesNames.join(',')}</td>
                               <td>{task.name}</td>
                               <td>{task.description}</td>
                               <td>{task.status}</td>
                               <td>{new Date(task.deadline).toDateString()}</td>
                               <td>
-                                {task.work}{" "}
-                                <button class="dash_submit_button">
-                                  Submit Work
-                                </button>
+                                {task.work} <button class="dash_submit_button">Submit Work</button>
                               </td>
                               <td>Verify</td>
                             </tr>
@@ -284,32 +250,24 @@ const Dashboard = () => {
                         })}
                     </tbody>
                   </table>
-                  <button
-                    class="dash_button button_left"
-                    onClick={show_remove_member}
-                  >
+                  <button class="dash_button button_left" onClick={show_remove_member}>
                     Remove Member
                   </button>
                   <button
                     class="dash_button button_right"
                     onClick={() => {
                       if (!taskSelected) {
-                        alert("You have not selected any task");
+                        alert('You have not selected any task');
                         return;
                       }
 
-                      window.confirm("Are you sure you want to delete it?") &&
-                        fetch(
-                          "http://localhost:5000/task/" + taskSelected._id,
-                          {
-                            method: "DELETE",
-                            headers: {
-                              Authorization: `Bearer ${localStorage.getItem(
-                                "token"
-                              )}`,
-                            },
-                          }
-                        )
+                      window.confirm('Are you sure you want to delete it?') &&
+                        fetch('http://localhost:5000/task/' + taskSelected._id, {
+                          method: 'DELETE',
+                          headers: {
+                            Authorization: `Bearer ${localStorage.getItem('token')}`,
+                          },
+                        })
                           .then((res) => res.json())
                           .then((data) => {
                             // console.log(data);
@@ -336,15 +294,8 @@ const Dashboard = () => {
         </div>
       </div>
       <OrgForm handleOrgRefresh={fetchOrg} />
-      <ProjectForm
-        handleProjRefresh={fetchProj}
-        organisation={organisationSelected?._id}
-      />
-      <AddMember
-        organisation={organisationSelected}
-        project={projectSelected}
-        handleOrgRefresh={fetchOrg}
-      />
+      <ProjectForm handleProjRefresh={fetchProj} organisation={organisationSelected?._id} />
+      <AddMember organisation={organisationSelected} project={projectSelected} handleOrgRefresh={fetchOrg} />
       <AddTask project={projectSelected} handleTaskRefresh={fetchTask} />
       <Reassign
         project={projectSelected}
@@ -352,11 +303,7 @@ const Dashboard = () => {
         handleTaskRefresh={fetchTask}
         handleProjRefresh={fetchProj}
       />
-      <RemoveMember
-        organisation={organisationSelected}
-        project={projectSelected}
-        handleProjRefresh={fetchProj}
-      />
+      <RemoveMember organisation={organisationSelected} project={projectSelected} handleProjRefresh={fetchProj} />
       <div id="new_submit_form">
         <button id="close_submit_form" onClick={close_submit_form}>
           X
@@ -375,11 +322,7 @@ const Dashboard = () => {
               <input type="hidden" name="project_id" value="" />
             </div>
 
-            <button
-              type="submit"
-              class="btn btn-primary form-btn"
-              name="submit_submit_form"
-            >
+            <button type="submit" class="btn btn-primary form-btn" name="submit_submit_form">
               Submit
             </button>
           </form>
@@ -403,18 +346,10 @@ const Dashboard = () => {
               <input type="hidden" name="project_id" value="" />
             </div>
 
-            <button
-              type="submit"
-              class="btn btn-primary form-btn"
-              name="submit_accept_form"
-            >
+            <button type="submit" class="btn btn-primary form-btn" name="submit_accept_form">
               Accept
             </button>
-            <button
-              type="submit"
-              class="btn btn-primary form-btn"
-              name="submit_reject_form"
-            >
+            <button type="submit" class="btn btn-primary form-btn" name="submit_reject_form">
               Reject
             </button>
           </form>

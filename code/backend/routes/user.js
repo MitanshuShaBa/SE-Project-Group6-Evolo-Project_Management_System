@@ -1,7 +1,5 @@
-const express = require("express");
-const {
-  isSignedIn
-} = require("../controllers/auth/middlewares");
+const express = require('express');
+const { isSignedIn } = require('../controllers/auth/middlewares');
 const {
   createTask,
   getTask,
@@ -10,9 +8,9 @@ const {
   reTagTask,
   getProjectTasks,
   deleteTask,
-} = require("../controllers/task");
+} = require('../controllers/task');
 const router = express.Router();
 
-router.get("/:user", isSignedIn, isInProj, getTask);
+router.get('/:user', isSignedIn, isInProj, getTask);
 
 module.exports = router;
