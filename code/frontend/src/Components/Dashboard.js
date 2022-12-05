@@ -233,7 +233,19 @@ const Dashboard = () => {
                             return m.name;
                           });
                           return (
-                            <tr class="my_task_to_do">
+                            <tr
+                              class="my_task_to_do"
+                              onClick={() => {
+                                setTaskSelected(task);
+                              }}
+                              style={{
+                                cursor: "pointer",
+                                backgroundColor:
+                                  taskSelected &&
+                                  task._id === taskSelected._id &&
+                                  "#4a4df7", //TODO color choose better
+                              }}
+                            >
                               <td>{assigneesNames.join(",")}</td>
                               <td>{task.name}</td>
                               <td>{task.description}</td>
@@ -254,7 +266,33 @@ const Dashboard = () => {
                   </button>
                   <button
                     class="dash_button button_right"
-                    onClick={show_delete_task}
+                    onClick={() => {
+                      window.confirm("Are you sure you want to delete it?") &&
+                        fetch(
+                          "http://localhost:5000/task/" + taskSelected._id,
+                          {
+                            method: "DELETE",
+                            headers: {
+                              Authorization: `Bearer ${localStorage.getItem(
+                                "token"
+                              )}`,
+                            },
+                          }
+                        )
+                          .then((res) => res.json())
+                          .then((data) => {
+                            // console.log(data);
+                            if (data.error) {
+                              alert(data.error);
+                              return;
+                            }
+                            setTaskSelected(null);
+                            fetchTask();
+                          })
+                          .catch((error) => {
+                            console.log(error);
+                          });
+                    }}
                   >
                     Delete Task
                   </button>
@@ -282,33 +320,6 @@ const Dashboard = () => {
         project={projectSelected}
         handleProjRefresh={fetchProj}
       />
-      <div id="delete_task_form">
-        <button id="close_delete_task_form" onClick={close_delete_task_form}>
-          X
-        </button>
-        <div id="d_task_form">
-          <h4>Delete Task</h4>
-          <form method="post" action="delete_task.php">
-            <div class="form-group">
-              <label>Task:</label>
-              <select name="tid" class="form-control">
-                <option value="select">Select</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <input type="hidden" name="project_id" value="" />
-            </div>
-
-            <button
-              type="submit"
-              class="btn btn-primary form-btn"
-              name="submit_delete_task_form"
-            >
-              Delete
-            </button>
-          </form>
-        </div>
-      </div>
       <div id="new_submit_form">
         <button id="close_submit_form" onClick={close_submit_form}>
           X

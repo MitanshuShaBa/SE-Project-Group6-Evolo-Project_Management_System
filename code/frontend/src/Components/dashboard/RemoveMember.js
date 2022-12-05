@@ -13,7 +13,7 @@ import {
 } from "../../utils";
 
 const RemoveMember = ({ organisation, project, handleProjRefresh }) => {
-  const [memberSelected, setMemberSelected] = useState(null);
+  const [memberSelected, setMemberSelected] = useState("none");
   return (
     <div id="remove_member_form">
       <button id="close_remove_member_form" onClick={close_remove_member_form}>
@@ -55,11 +55,12 @@ const RemoveMember = ({ organisation, project, handleProjRefresh }) => {
               name="user"
               class="form-control"
               id="remove_member_user"
+              defaultValue={"none"}
               onChange={(e) => {
                 setMemberSelected(e.target.value);
               }}
             >
-              <option value={null} selected disabled hidden>
+              <option value={"none"} selected disabled hidden>
                 Select an Option
               </option>
               {organisation &&
