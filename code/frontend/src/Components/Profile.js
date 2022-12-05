@@ -50,7 +50,7 @@ const Profile = () => {
                 </tr>
                 <tr>
                     <td>Organization</td>
-                    <td>{organisations.length > 0 ? organisations.map((i, k)=>{return i.name + " "}) : "-"}</td>
+                    <td>{organisations.length > 0 ? organisations.map(item => item.name).join(', ') : "-"}</td>
                 </tr>
             </tbody>
         </table>
