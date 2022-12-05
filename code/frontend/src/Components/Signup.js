@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -27,6 +29,8 @@ const Signup = () => {
                       .then((res) => res.json())
                       .then((data) => {
                         localStorage.setItem("token", data.token);
+                        localStorage.setItem("user", data.user);
+                        navigate("/dashboard");
                       })
                       .catch((error) => {
                         console.log(error);
@@ -85,15 +89,8 @@ const Signup = () => {
                   <button type="submit" class="btn btn-primary form-btn">
                     Register
                   </button>
-                  <button
-                    type="submit"
-                    class="btn btn-primary form-btn"
-                    name="cancel"
-                  >
-                    Cancel
-                  </button>
                   <p class="alter">
-                    Already have an account, <a href="login.php">Login</a>
+                    Already have an account, <Link to="/login">Login</Link>
                   </p>
                 </form>
               </div>

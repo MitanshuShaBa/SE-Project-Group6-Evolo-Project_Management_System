@@ -6,7 +6,6 @@ const { isSignedIn } = require("./middlewares");
 exports.isSignedIn = isSignedIn;
 
 exports.signUp = (req, res) => {
-  console.log(req.body);
   const user = new User(req.body);
   user.save((err, user) => {
     if (err) {
@@ -114,6 +113,7 @@ const respondWithTokenAndUser = (res, user) => {
     user: {
       _id: user._id,
       email: user.email,
+      name: user.name,
     },
   });
 };

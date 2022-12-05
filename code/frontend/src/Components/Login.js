@@ -1,11 +1,10 @@
 import Header from "./Header";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   return (
     <div>
@@ -32,6 +31,8 @@ const Login = () => {
                       .then((res) => res.json())
                       .then((data) => {
                         localStorage.setItem("token", data.token);
+                        localStorage.setItem("user", JSON.stringify(data.user));
+                        navigate("/dashboard");
                       })
                       .catch((error) => {
                         console.log(error);
@@ -67,17 +68,11 @@ const Login = () => {
                   >
                     Login
                   </button>
-                  <button
-                    type="submit"
-                    class="btn btn-primary form-btn"
-                    name="cancel"
-                  >
-                    Cancel
-                  </button>
+
                   <p class="alter">
                     Dont have an account,
                     {/* <a href="signup.php">Sign up</a> */}
-                    <a onClick={() => navigate("/signup")}>Sign up </a>
+                    <Link to={"/signup"}>Sign up </Link>
                     {/* <li class="nav-item" onClick={()=>navigate('/login')}><a class="nav-link page-scroll" >Login/Signup</a></li> */}
                   </p>
                 </form>
