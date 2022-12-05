@@ -61,7 +61,7 @@ const NavBar = () => {
               <li class="nav-item">
                 <Link
                   class="nav-link page-scroll"
-                  to=""
+                  to="/"
                   onClick={() => {
                     setIsLogin(false);
                     localStorage.removeItem("token");
