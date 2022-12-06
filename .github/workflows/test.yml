@@ -25,6 +25,8 @@ jobs:
           npm test
           cd ..
           cd ..
+        env:
+          SECRET: ${{ secrets.SECRET }}
       - name: Coverage
         run: |
           node ${GITHUB_WORKSPACE}/.github/coverage.js
