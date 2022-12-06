@@ -12,7 +12,7 @@
 <!-- ![Discord](https://img.shields.io/discord/1027412417661120582) -->
 
 [![Code Coverage](https://codecov.io/gh/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/branch/main/graphs/badge.svg)](https://codecov.io/gh/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/branch/main)
-![GitHub Workflow Status](https://github.com/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/actions/workflows/PHP-app.yml/badge.svg?branch=main)
+![GitHub Workflow Status](https://github.com/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/actions/workflows/pages/pages-build-deployment/badge.svg?branch=main)
 
 ![image](https://user-images.githubusercontent.com/23338660/205757700-91224007-a09b-4903-8a4d-e6fd996a654a.png)
 
