@@ -21,6 +21,7 @@ jobs:
           npm ci
       - name: Test
         run: |
+          cd code/backend
           npm test
           cd ..
           cd ..
