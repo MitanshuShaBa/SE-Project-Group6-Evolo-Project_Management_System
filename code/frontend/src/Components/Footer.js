@@ -1,4 +1,5 @@
-const Footer = () => {
+const Footer = () => { 
+  
   return (
     <div class="footer">
       <div class="container">
