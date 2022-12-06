@@ -17,6 +17,7 @@ jobs:
           node-version: 16.x
       - name: Install Dependancies
         run: |
+          cd code/backend
           npm ci
       - name: Coverage
         run: |
