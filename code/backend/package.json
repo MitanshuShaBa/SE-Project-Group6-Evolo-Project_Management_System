@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon -r dotenv/config index.js"
+    "start": "node server.js",
+    "dev": "nodemon -r dotenv/config server.js",
+    "test": "jest --runInBand --coverage --coverageReporters=\"json-summary\""
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,11 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^29.3.1",
+    "nodemon": "^2.0.20",
+    "superagent": "^8.0.5",
+    "supertest": "^6.3.2"
   }
 }
