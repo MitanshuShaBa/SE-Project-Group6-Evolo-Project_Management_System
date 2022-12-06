@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -13,6 +12,9 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
+app.get('/', (req, res) => {
+  res.send('Hi');
+});
 app.use('/auth', authRoutes);
 app.use('/organisation', organisationRoutes);
 app.use('/project', projectRoutes);
@@ -27,15 +29,4 @@ app.use((err, req, res, next) => {
   next();
 });
 
-//DB connections
-mongoose.connect(process.env.DB_URL).then(() => {
-  console.log('DB CONNECTED!!');
-});
-
-// PORT
-const port = process.env.PORT || 5000;
-
-//Start server
-app.listen(port, () => {
-  console.log(`app is running on port ${port}...`);
-});
+module.exports = app;
