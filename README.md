@@ -32,7 +32,14 @@ Evolo users can be divided into two types:
 ## New Feature Additions:
 - You can now add a new organization and view projects specific to the organization.
 - Users have a profile page to view their Organization, Project and Personal Details.
+- You can switch between different organizations.
 - During signup, password strength, validity of email and contact number is checked.
+
+## Significant Improvements:
+- Earlier code was written in PHP, we have trasnformed the code using MERN stack technologies to enhance the throughput of the application.
+- We have improved developers' experience by modularizing the code using ReactJS components.
+- We implemented the microservice architecure for faster deployment and troubleshooting.
+- We have followed the MVC paradigm to simplify the testing process and develop different view components.
 
 ## Technology Stack
 Our website uses a MERN Stack Technologies: MongoDB, ExpressJS, ReactJS, NodeJS
