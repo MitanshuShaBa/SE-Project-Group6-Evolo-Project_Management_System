@@ -22,7 +22,7 @@ import { OrgForm } from './dashboard/OrgForm';
 import AddMember from './dashboard/AddMember';
 import RemoveMember from './dashboard/RemoveMember';
 import { AddTask } from './dashboard/AddTask';
-import { Reassign } from './dashboard/Reassign';
+// import { Reassign } from './dashboard/Reassign';
 
 const Dashboard = () => {
   const [organisations, setOrganisations] = useState([]);
@@ -101,11 +101,11 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchOrg();
-    const orgSync = setInterval(() => {
-      fetchOrg();
-    }, 15000);
+    // const orgSync = setInterval(() => {
+    //   fetchOrg();
+    // }, 15000);
     return () => {
-      clearInterval(orgSync);
+      // clearInterval(orgSync);
     };
     // eslint-disable-next-line
   }, []);
@@ -297,12 +297,12 @@ const Dashboard = () => {
       <ProjectForm handleProjRefresh={fetchProj} organisation={organisationSelected?._id} />
       <AddMember organisation={organisationSelected} project={projectSelected} handleOrgRefresh={fetchOrg} />
       <AddTask project={projectSelected} handleTaskRefresh={fetchTask} />
-      <Reassign
+      {/* <Reassign
         project={projectSelected}
         task={taskSelected}
         handleTaskRefresh={fetchTask}
         handleProjRefresh={fetchProj}
-      />
+      /> */}
       <RemoveMember organisation={organisationSelected} project={projectSelected} handleProjRefresh={fetchProj} />
       <div id="new_submit_form">
         <button id="close_submit_form" onClick={close_submit_form}>
