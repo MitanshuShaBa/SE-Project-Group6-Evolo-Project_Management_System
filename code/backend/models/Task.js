@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema(
   {
@@ -13,16 +13,8 @@ const taskSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: [
-        "created",
-        "assigned",
-        "in progress",
-        "submitted",
-        "reassigned",
-        "verified",
-        "archived",
-      ],
-      default: "created",
+      enum: ['created', 'assigned', 'in progress', 'submitted', 'reassigned', 'verified', 'archived'],
+      default: 'created',
     },
     deadline: {
       type: Date,
@@ -34,15 +26,13 @@ const taskSchema = new mongoose.Schema(
     },
     assignees: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "User",
+      ref: 'User',
       validate: {
         validator: (arr) => {
           const s = new Set(arr.map(String));
           return s.size === arr.length;
         },
-        message: (p) =>
-          `The values provided for '${p.path}', ` +
-          `[${p.value}], contains duplicates.`,
+        message: (p) => `The values provided for '${p.path}', ` + `[${p.value}], contains duplicates.`,
       },
     },
     tags: {
@@ -52,9 +42,7 @@ const taskSchema = new mongoose.Schema(
           const s = new Set(arr);
           return s.size === arr.length;
         },
-        message: (p) =>
-          `The values provided for '${p.path}', ` +
-          `[${p.value}], contains duplicates.`,
+        message: (p) => `The values provided for '${p.path}', ` + `[${p.value}], contains duplicates.`,
       },
     },
     activity: [
@@ -65,7 +53,7 @@ const taskSchema = new mongoose.Schema(
     ],
     project: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Project",
+      ref: 'Project',
       required: true,
     },
   },
@@ -74,4 +62,4 @@ const taskSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Task", taskSchema);
+module.exports = mongoose.model('Task', taskSchema);

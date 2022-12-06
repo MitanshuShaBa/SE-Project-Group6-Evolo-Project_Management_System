@@ -1,22 +1,22 @@
-import Login from "./Components/Login";
-import Signup from "./Components/Signup";
+import Login from './Components/Login';
+import Signup from './Components/Signup';
 
-import Navbar from "./Components/Navbar";
-import HomeHeader from "./Components/HomeHeader";
-import Home from "./Components/Home";
-import Dashboard from "./Components/Dashboard";
-import Footer from "./Components/Footer";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
-import "./css/styles.css";
-import React, { useEffect, useState } from "react";
-import Profile from "./Components/Profile";
+import Navbar from './Components/Navbar';
+import HomeHeader from './Components/HomeHeader';
+import Home from './Components/Home';
+import Dashboard from './Components/Dashboard';
+import Footer from './Components/Footer';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import './css/styles.css';
+import React, { useEffect, useState } from 'react';
+import Profile from './Components/Profile';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     const authStateChange = setInterval(() => {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       if (token !== null) {
         setIsLogin(true);
       } else {

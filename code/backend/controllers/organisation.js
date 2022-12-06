@@ -1,7 +1,7 @@
-const Organisation = require("../models/Organisation");
-const Project = require("../models/Project");
-const Task = require("../models/Task");
-const mongoose = require("mongoose");
+const Organisation = require('../models/Organisation');
+const Project = require('../models/Project');
+const Task = require('../models/Task');
+const mongoose = require('mongoose');
 
 exports.createOrganisation = (req, res) => {
   const { name, address, phoneNum } = req.body;
@@ -23,8 +23,8 @@ exports.getOrganisation = (req, res) => {
   const { organisationID } = req.params;
 
   Organisation.findById(organisationID)
-    .populate("members", "name email")
-    .populate("leader", "name email")
+    .populate('members', 'name email')
+    .populate('leader', 'name email')
     .exec((err, organisation) => {
       if (err) {
         return res.status(400).send({ error: err });
@@ -38,8 +38,8 @@ exports.getOrganisationOfUser = (req, res) => {
   const user = req.auth.id;
 
   Organisation.find({ members: mongoose.mongoose.Types.ObjectId(user) })
-    .populate("members", "name email")
-    .populate("leader", "name email")
+    .populate('members', 'name email')
+    .populate('leader', 'name email')
     .exec((err, organisations) => {
       if (err) {
         return res.status(400).send({ error: err });
@@ -103,9 +103,7 @@ exports.removeMember = (req, res) => {
     .exec()
     .then((organisation) => {
       if (organisation.members.length === 1) {
-        return res
-          .status(400)
-          .send({ error: "Organisation needs atleast 1 member" });
+        return res.status(400).send({ error: 'Organisation needs atleast 1 member' });
       }
 
       let tmp = organisation.members.map((arr) => arr.toString());
@@ -136,10 +134,7 @@ exports.deleteOrganisation = async (req, res) => {
 
   try {
     await session.withTransaction(async () => {
-      const projects = await Project.find({ organisation: organisationID })
-        .select("_id")
-        .session(session)
-        .exec();
+      const projects = await Project.find({ organisation: organisationID }).select('_id').session(session).exec();
 
       await Promise.all(
         projects.map(async (project) => {

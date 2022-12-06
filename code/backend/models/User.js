@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const crypto = require("crypto");
-const { v4 } = require("uuid");
-const { isEmail, isMobilePhone } = require("validator");
+const mongoose = require('mongoose');
+const crypto = require('crypto');
+const { v4 } = require('uuid');
+const { isEmail, isMobilePhone } = require('validator');
 
 const userSchema = new mongoose.Schema(
   {
@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       validate: {
         validator: isEmail,
-        message: "{VALUE} is not a valid email",
+        message: '{VALUE} is not a valid email',
         isAsync: false,
       },
     },
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       validate: {
         validator: isMobilePhone,
-        message: "{VALUE} is not a valid phone number",
+        message: '{VALUE} is not a valid phone number',
         isAsync: false,
       },
     },
@@ -44,7 +44,7 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema
-  .virtual("password")
+  .virtual('password')
   .set(function (password) {
     this._password = password;
     this.salt = v4();
@@ -59,16 +59,13 @@ userSchema.methods = {
     return this.securePassword(plainpassword) === this.encry_password;
   },
   securePassword: function (plainpassword) {
-    if (!plainpassword) return "";
+    if (!plainpassword) return '';
     try {
-      return crypto
-        .createHmac("sha256", this.salt)
-        .update(plainpassword)
-        .digest("hex");
+      return crypto.createHmac('sha256', this.salt).update(plainpassword).digest('hex');
     } catch (error) {
-      return "";
+      return '';
     }
   },
 };
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

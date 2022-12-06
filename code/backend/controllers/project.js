@@ -1,6 +1,6 @@
-const Project = require("../models/Project");
-const Task = require("../models/Task");
-const mongoose = require("mongoose");
+const Project = require('../models/Project');
+const Task = require('../models/Task');
+const mongoose = require('mongoose');
 
 exports.createProject = (req, res) => {
   const { name, description, startDate, organisation } = req.body;
@@ -29,16 +29,16 @@ exports.getProject = (req, res) => {
   const { projectID } = req.params;
 
   Project.findById(projectID)
-    .populate("members", "name email")
-    .populate("leader", "name email")
-    .populate("organisation", "name")
+    .populate('members', 'name email')
+    .populate('leader', 'name email')
+    .populate('organisation', 'name')
     .exec((err, project) => {
       if (err) {
         return res.status(400).send({ error: err });
       }
 
       if (!project) {
-        return res.status(400).send({ error: "Project not found" });
+        return res.status(400).send({ error: 'Project not found' });
       }
 
       res.send(project);
@@ -53,9 +53,9 @@ exports.getProjectListForUser = (req, res) => {
     members: mongoose.mongoose.Types.ObjectId(user),
     organisation: organisationID,
   })
-    .populate("members", "name email")
-    .populate("leader", "name email")
-    .populate("organisation", "name")
+    .populate('members', 'name email')
+    .populate('leader', 'name email')
+    .populate('organisation', 'name')
     .exec((err, projects) => {
       if (err) {
         return res.status(400).send({ error: err });
@@ -117,15 +117,11 @@ exports.removeMember = (req, res) => {
     .exec()
     .then((project) => {
       if (project.members.length === 1) {
-        return res
-          .status(400)
-          .send({ error: "Project needs atleast 1 member" });
+        return res.status(400).send({ error: 'Project needs atleast 1 member' });
       }
 
       if (project.leader.toString() === userID) {
-        return res
-          .status(400)
-          .send({ error: "You cannot remove the leader of the project" });
+        return res.status(400).send({ error: 'You cannot remove the leader of the project' });
       }
 
       let tmp = project.members.map((arr) => arr.toString());

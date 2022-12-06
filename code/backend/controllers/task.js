@@ -1,4 +1,4 @@
-const Task = require("../models/Task");
+const Task = require('../models/Task');
 
 exports.createTask = (req, res) => {
   const { name, description, deadline, assignees, project, tags } = req.body;
@@ -6,9 +6,9 @@ exports.createTask = (req, res) => {
     ...{ name, description, deadline, assignees, project, tags },
   });
   const currTime = Date.now();
-  task.activity.push({ timestamp: currTime, content: "Task was created" });
+  task.activity.push({ timestamp: currTime, content: 'Task was created' });
   if (assignees && assignees.length > 0) {
-    task.status = "assigned";
+    task.status = 'assigned';
     task.assignees = assignees.sort();
     task.activity.push({
       timestamp: currTime,
@@ -36,11 +36,11 @@ exports.getTask = (req, res) => {
   const { taskID } = req.params;
 
   Task.findById(taskID)
-    .populate("assignees", "name email")
+    .populate('assignees', 'name email')
     .populate({
-      path: "project",
-      select: "name organisation",
-      populate: { path: "organisation", select: "name" },
+      path: 'project',
+      select: 'name organisation',
+      populate: { path: 'organisation', select: 'name' },
     })
     .exec((err, task) => {
       if (err) {
@@ -48,7 +48,7 @@ exports.getTask = (req, res) => {
       }
 
       if (!task) {
-        return res.status(400).send({ error: "Task not found" });
+        return res.status(400).send({ error: 'Task not found' });
       }
 
       res.send(task);
@@ -59,15 +59,15 @@ exports.getProjectTasks = (req, res, archived) => {
   const { projectID } = req.params;
 
   const query = archived
-    ? Task.find({ project: projectID, status: "archived" })
-    : Task.find({ project: projectID, status: { $ne: "archived" } });
+    ? Task.find({ project: projectID, status: 'archived' })
+    : Task.find({ project: projectID, status: { $ne: 'archived' } });
 
   query
-    .populate("assignees", "name email")
+    .populate('assignees', 'name email')
     .populate({
-      path: "project",
-      select: "name organisation",
-      populate: { path: "organisation", select: "name" },
+      path: 'project',
+      select: 'name organisation',
+      populate: { path: 'organisation', select: 'name' },
     })
     .exec((err, tasks) => {
       if (err) {
@@ -110,9 +110,7 @@ exports.reassignTask = (req, res) => {
     }
 
     if (assignees.sort().toString() === task.assignees.toString()) {
-      return res
-        .status(400)
-        .send({ error: "Assignees are the same as before. Nothing to update" });
+      return res.status(400).send({ error: 'Assignees are the same as before. Nothing to update' });
     }
 
     task.assignees = assignees.sort();
@@ -138,9 +136,7 @@ exports.reTagTask = (req, res) => {
     }
 
     if (tags.sort().toString() === task.tags.toString()) {
-      return res
-        .status(400)
-        .send({ error: "tags are the same as before. Nothing to update" });
+      return res.status(400).send({ error: 'tags are the same as before. Nothing to update' });
     }
 
     task.tags = tags.sort();

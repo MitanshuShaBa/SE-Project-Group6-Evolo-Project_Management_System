@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { isMobilePhone } = require("validator");
+const mongoose = require('mongoose');
+const { isMobilePhone } = require('validator');
 
 const organisationSchema = new mongoose.Schema(
   {
@@ -16,26 +16,24 @@ const organisationSchema = new mongoose.Schema(
       type: Number,
       validate: {
         validator: isMobilePhone,
-        message: "{VALUE} is not a valid phone number",
+        message: '{VALUE} is not a valid phone number',
         isAsync: false,
       },
     },
     leader: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
     members: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "User",
+      ref: 'User',
       validate: {
         validator: (arr) => {
           const s = new Set(arr.map(String));
           return s.size === arr.length;
         },
-        message: (p) =>
-          `The values provided for '${p.path}', ` +
-          `[${p.value}], contains duplicates.`,
+        message: (p) => `The values provided for '${p.path}', ` + `[${p.value}], contains duplicates.`,
       },
     },
   },
@@ -44,4 +42,4 @@ const organisationSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Organisation", organisationSchema);
+module.exports = mongoose.model('Organisation', organisationSchema);
