@@ -17,7 +17,7 @@
 
 <!-- End Code Coverage -->
 
-![GitHub Workflow Status](https://github.com/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/actions/workflows/PHP-app.yml/badge.svg?branch=main)
+[![Node Test](https://github.com/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/actions/workflows/test.yml/badge.svg)](https://github.com/MitanshuShaBa/SE-Project-Group6-Evolo-Project_Management_System/actions/workflows/test.yml)
 
 ![image](https://user-images.githubusercontent.com/23338660/205757700-91224007-a09b-4903-8a4d-e6fd996a654a.png)
 
