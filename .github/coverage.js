@@ -22,7 +22,7 @@ if (pct > 80) {
   color = "red";
 }
 
-let str = fs.readFileSync("../README.md").toString("utf-8");
+let str = fs.readFileSync("./README.md").toString("utf-8");
 str = str.replace(
   /<!-- Begin Code Coverage[^]*End Code Coverage -->/gm,
   `<!-- Begin Code Coverage -->\n\
@@ -32,4 +32,4 @@ str = str.replace(
 <!-- End Code Coverage -->`
 );
 
-fs.writeFileSync("../README.md", str);
+fs.writeFileSync("./README.md", str);
