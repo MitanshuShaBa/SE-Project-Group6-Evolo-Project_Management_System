@@ -19,6 +19,9 @@ jobs:
         run: |
           cd code/backend
           npm ci
+      - name: Test
+        run: |
+          npm test
           cd ..
           cd ..
       - name: Coverage
