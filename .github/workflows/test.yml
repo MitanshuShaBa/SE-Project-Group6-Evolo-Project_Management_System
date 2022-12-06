@@ -27,6 +27,7 @@ jobs:
           cd ..
         env:
           SECRET: ${{ secrets.SECRET }}
+          DB_URL: ${{ secrets.DB_URL }}
       - name: Coverage
         run: |
           node ${GITHUB_WORKSPACE}/.github/coverage.js
