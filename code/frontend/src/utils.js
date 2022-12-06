@@ -60,9 +60,6 @@ exports.close_submit_form = () => {
   return false;
 };
 exports.show_verify_work = (t_id, work) => {
-  console.log(t_id);
-  document.getElementById('t_id_verify').value = t_id;
-  document.getElementById('work_verification').innerHTML = '<a href=' + work + '>Click</a>';
   var bg = document.getElementById('new_verify_form');
   bg.style.display = 'inline';
   return false;

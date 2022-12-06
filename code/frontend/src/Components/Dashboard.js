@@ -15,6 +15,8 @@ import {
   show_new_task,
   show_reassign_task,
   show_remove_member,
+  show_submit_work,
+  show_verify_work,
 } from '../utils';
 import { ProjectForm } from './dashboard/ProjectForm';
 import { useEffect, useState } from 'react';
@@ -22,6 +24,8 @@ import { OrgForm } from './dashboard/OrgForm';
 import AddMember from './dashboard/AddMember';
 import RemoveMember from './dashboard/RemoveMember';
 import { AddTask } from './dashboard/AddTask';
+import { SubmitForm } from './dashboard/SubmitForm';
+import VerifyWork from './dashboard/VerifyWork';
 // import { Reassign } from './dashboard/Reassign';
 
 const Dashboard = () => {
@@ -31,6 +35,17 @@ const Dashboard = () => {
   const [projectSelected, setProjectsSelected] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [taskSelected, setTaskSelected] = useState(null);
+
+  const getColor = (status) => {
+    const color = {
+      verified: '#aad3b1',
+      submitted: '#1ba6c2',
+      reassigned: '#e03a4e',
+      assigned: '#f5f5f5',
+      created: '#f5f5f5',
+    };
+    return color[status];
+  };
 
   const fetchTask = () =>
     organisationSelected &&
@@ -193,7 +208,7 @@ const Dashboard = () => {
                   <button class="dash_button button_left" onClick={show_new_member}>
                     Add New Member
                   </button>
-                  <button
+                  {/* <button
                     class="dash_button"
                     style={{ float: 'right', marginRight: '15vw' }}
                     onClick={() => {
@@ -205,8 +220,8 @@ const Dashboard = () => {
                     }}
                   >
                     Reassign Task
-                  </button>
-                  <button class="dash_button " style={{ float: 'right', marginRight: '1vw' }} onClick={show_new_task}>
+                  </button> */}
+                  <button class="dash_button " style={{ float: 'right', marginRight: '15vw' }} onClick={show_new_task}>
                     Assign Task
                   </button>
                   <table class="dash_table">
@@ -233,7 +248,8 @@ const Dashboard = () => {
                               }}
                               style={{
                                 cursor: 'pointer',
-                                backgroundColor: taskSelected && task._id === taskSelected._id && '#4a4df7', //TODO color choose better
+                                backgroundColor:
+                                  taskSelected && task._id === taskSelected._id ? '#fffaa0' : getColor(task.status),
                               }}
                             >
                               <td>{assigneesNames.join(',')}</td>
@@ -242,9 +258,19 @@ const Dashboard = () => {
                               <td>{task.status}</td>
                               <td>{new Date(task.deadline).toDateString()}</td>
                               <td>
-                                {task.work} <button class="dash_submit_button">Submit Work</button>
+                                {task.work}
+                                <br />
+                                <button onClick={show_submit_work} class="dash_submit_button">
+                                  Submit Work
+                                </button>
                               </td>
-                              <td>Verify</td>
+                              <td>
+                                {task?.work && (
+                                  <button onClick={show_verify_work} class="dash_submit_button">
+                                    Verify
+                                  </button>
+                                )}
+                              </td>
                             </tr>
                           );
                         })}
@@ -304,57 +330,8 @@ const Dashboard = () => {
         handleProjRefresh={fetchProj}
       /> */}
       <RemoveMember organisation={organisationSelected} project={projectSelected} handleProjRefresh={fetchProj} />
-      <div id="new_submit_form">
-        <button id="close_submit_form" onClick={close_submit_form}>
-          X
-        </button>
-        <div id="submit_form">
-          <h4>Submit work</h4>
-          <form method="post" action="add_work.php">
-            <div class="form-group">
-              <label>Work Link: </label>
-              <input type="text" name="work" class="form-control" />
-            </div>
-            <div class="form-group">
-              <input type="hidden" name="t_id" id="t_id_work" />
-            </div>
-            <div class="form-group">
-              <input type="hidden" name="project_id" value="" />
-            </div>
-
-            <button type="submit" class="btn btn-primary form-btn" name="submit_submit_form">
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
-      <div id="new_verify_form">
-        <button id="close_verify_form" onClick={close_verify_form}>
-          X
-        </button>
-        <div id="verify_form">
-          <h4>Verify work</h4>
-          <form method="post" action="verify_work.php">
-            <div class="form-group">
-              <label>Work : </label>
-              <p id="work_verification"></p>
-            </div>
-            <div class="form-group">
-              <input type="hidden" name="t_id" id="t_id_verify" />
-            </div>
-            <div class="form-group">
-              <input type="hidden" name="project_id" value="" />
-            </div>
-
-            <button type="submit" class="btn btn-primary form-btn" name="submit_accept_form">
-              Accept
-            </button>
-            <button type="submit" class="btn btn-primary form-btn" name="submit_reject_form">
-              Reject
-            </button>
-          </form>
-        </div>
-      </div>
+      <SubmitForm task={taskSelected} handleTaskRefresh={fetchTask} />
+      <VerifyWork task={taskSelected} handleTaskRefresh={fetchTask} />
     </>
   );
 };
