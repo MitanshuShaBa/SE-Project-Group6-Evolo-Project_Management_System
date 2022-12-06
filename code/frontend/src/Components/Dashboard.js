@@ -165,6 +165,39 @@ const Dashboard = () => {
                   );
                 })}
               </ul>
+              <button
+                class="dash_button"
+                style={{ margin: '0.25em' }}
+                onClick={() => {
+                  if (!organisationSelected) {
+                    alert('Select org first');
+                    return;
+                  }
+
+                  window.confirm('Are you sure you want to delete it?') &&
+                    fetch('http://localhost:5000/organisation/' + organisationSelected._id, {
+                      method: 'DELETE',
+                      headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                      },
+                    })
+                      .then((res) => res.text())
+                      .then((data) => {
+                        // console.log(data);
+                        if (data) {
+                          alert(JSON.stringify(data));
+                          return;
+                        }
+                        setOrganisationsSelected(null);
+                        fetchOrg();
+                      })
+                      .catch((error) => {
+                        console.log(error);
+                      });
+                }}
+              >
+                Delete org
+              </button>
               <div class="new_org_div">
                 <button class="new_project_btn" style={{ width: '7vw' }} onClick={show_new_org}>
                   New Org
