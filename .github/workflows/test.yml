@@ -19,6 +19,8 @@ jobs:
         run: |
           cd code/backend
           npm ci
+          cd ..
+          cd ..
       - name: Coverage
         run: |
           node ${GITHUB_WORKSPACE}/.github/coverage.js
