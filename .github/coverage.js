@@ -2,7 +2,7 @@ const fs = require("fs");
 
 let json = JSON.parse(
   fs
-    .readFileSync("../code/backend/coverage/coverage-summary.json")
+    .readFileSync("./code/backend/coverage/coverage-summary.json")
     .toString("utf-8")
 );
 
