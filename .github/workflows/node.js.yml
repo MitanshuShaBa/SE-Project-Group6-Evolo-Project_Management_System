@@ -20,16 +20,13 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2.1.0
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-      working-directory: code/backend
-    - run: npm run build --if-present 
-      working-directory: code/backend/
+    - run: cd code/backend/ npm ci
+    - run: cd code/backend/ npm run build --if-present 
     
-    - run: npm test
-      working-directory: code/backend
+    - run: cd code/backend/ npm test
