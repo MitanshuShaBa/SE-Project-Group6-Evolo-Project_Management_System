@@ -208,6 +208,33 @@ const Dashboard = () => {
                   <button class="dash_button button_left" onClick={show_new_member}>
                     Add New Member
                   </button>
+                  <button
+                    class="dash_button button_left"
+                    onClick={() => {
+                      window.confirm('Are you sure you want to delete it?') &&
+                        fetch('http://localhost:5000/project/' + projectSelected._id, {
+                          method: 'DELETE',
+                          headers: {
+                            Authorization: `Bearer ${localStorage.getItem('token')}`,
+                          },
+                        })
+                          .then((res) => res.text())
+                          .then((data) => {
+                            // console.log(data);
+                            if (data) {
+                              alert(JSON.stringify(data));
+                              return;
+                            }
+                            setProjectsSelected(null);
+                            fetchProj();
+                          })
+                          .catch((error) => {
+                            console.log(error);
+                          });
+                    }}
+                  >
+                    Delete Project
+                  </button>
                   {/* <button
                     class="dash_button"
                     style={{ float: 'right', marginRight: '15vw' }}
